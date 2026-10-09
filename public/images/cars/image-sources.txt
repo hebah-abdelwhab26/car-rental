@@ -1,0 +1,60 @@
+Car rental demo image sources
+Downloaded on: 2026-10-09 14:07:13
+Images are sourced from Wikimedia Commons. Review each source page and its license before production/commercial use.
+
+FILE | public/images/cars/economy/toyota-yaris-2024-red.jpg
+TITLE | File:2009 Toyota Yaris TR VVTi - 1329cc 1.3 (100PS) Petrol - Chilli Red - 02-2024, Front.jpg
+AUTHOR | Harvey Bold
+LICENSE | CC BY 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3A2009_Toyota_Yaris_TR_VVTi_-_1329cc_1.3_%28100PS%29_Petrol_-_Chilli_Red_-_02-2024%2C_Front.jpg
+
+NOT DOWNLOADED | hyundai-accent-2024-blue.jpg | Search: Hyundai Accent 2024 blue | No suitable JPG result
+FILE | public/images/cars/economy/kia-pegas-red.jpg
+TITLE | File:Kia Pegas 02 China 2018-03-12.jpg
+AUTHOR | Navigator84
+LICENSE | CC BY-SA 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3AKia_Pegas_02_China_2018-03-12.jpg
+
+FILE | public/images/cars/economy/nissan-sunny-blue.jpg
+TITLE | File:2003 Nissan Sunny 1.5 Super Saloon 70th-II in Excellent Blue Pearl (facelift; Japan).jpg
+AUTHOR | NZ Car Freak
+LICENSE | CC BY-SA 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3A2003_Nissan_Sunny_1.5_Super_Saloon_70th-II_in_Excellent_Blue_Pearl_%28facelift%3B_Japan%29.jpg
+
+FILE | public/images/cars/sedan/toyota-corolla-2024-blue.jpg
+TITLE | File:2002 Toyota Corolla T-Spirit VVTi - 1598cc 1.6 (110PS) Petrol - Greyish Blue - 02-2024, Rear.jpg
+AUTHOR | Harvey Bold
+LICENSE | CC BY 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3A2002_Toyota_Corolla_T-Spirit_VVTi_-_1598cc_1.6_%28110PS%29_Petrol_-_Greyish_Blue_-_02-2024%2C_Rear.jpg
+
+FILE | public/images/cars/sedan/hyundai-elantra-2024-white.jpg
+TITLE | File:2024 Hyundai Elantra Luxury in Atlas White, front left, 2024-08-11.jpg
+AUTHOR | Elise240SX
+LICENSE | CC BY-SA 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3A2024_Hyundai_Elantra_Luxury_in_Atlas_White%2C_front_left%2C_2024-08-11.jpg
+
+NOT DOWNLOADED | kia-k5-2024-green.jpg | Search: Kia K5 2024 green | No suitable JPG result
+NOT DOWNLOADED | toyota-camry-2024-bronze.jpg | Search: Toyota Camry 2024 bronze | No suitable JPG result
+FILE | public/images/cars/suv/hyundai-tucson-2024-red.jpg
+TITLE | File:2024 Hyundai Tucson Preferred in Ultimate Red, front left, 2024-09-30.jpg
+AUTHOR | Elise240SX
+LICENSE | CC BY-SA 4.0
+SOURCE | https://commons.wikimedia.org/wiki/File%3A2024_Hyundai_Tucson_Preferred_in_Ultimate_Red%2C_front_left%2C_2024-09-30.jpg
+
+NOT DOWNLOADED | kia-sportage-2024-orange.jpg | Search: Kia Sportage 2024 orange | No suitable JPG result
+FAILED | toyota-rav4-2024-blue.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | ford-explorer-2024-black.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | toyota-innova-2024-white.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | chevrolet-tahoe-2024-blue.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | hyundai-santa-fe-2024-green.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | bmw-5-series-2024-blue.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | mercedes-e-class-2024-black.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+
+FAILED | genesis-g80-2024-burgundy.jpg | Response status code does not indicate success: 429 (Too Many Requests).
+

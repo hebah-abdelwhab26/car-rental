@@ -4,7 +4,7 @@
 
 {{-- HERO SECTION --}}
 <section class="hero-wrap hero-wrap-2"
-         style="background-image: url('{{ $product->image ? asset('img/product/' . $product->image) : asset('images/bg_3.jpg') }}');">
+         style="background-image: url('{{ $product->image ? asset($product->image) : asset('images/bg_3.jpg') }}');">
     <div class="overlay"></div>
 
     <div class="container">
@@ -44,7 +44,7 @@
                 {{-- MAIN IMAGE --}}
                 <div class="mb-4">
                     @if($product->image)
-                        <img src="{{ asset('img/product/' . $product->image) }}"
+                        <img src="{{ asset($product->image) }}"
                              class="img-fluid rounded shadow"
                              alt="{{ $product->name }}"
                              style="width:100%; max-height:450px; object-fit:cover;">
@@ -131,6 +131,7 @@
                         </form>
                     @else
                         <hr class="my-4">
+
                         <p class="text-muted">
                             {{ __('messages.please_login_to_comment') }}
                             <a href="{{ route('login') }}">{{ __('messages.login') }}</a>

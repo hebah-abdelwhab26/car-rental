@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class CarImage extends Model
 {
@@ -15,6 +15,9 @@ class CarImage extends Model
         'sort_order',
     ];
 
+    /**
+     * السيارة التي تنتمي إليها الصورة
+     */
     public function product()
     {
         return $this->belongsTo(Product::class);

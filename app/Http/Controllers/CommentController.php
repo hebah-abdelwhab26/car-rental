@@ -28,15 +28,19 @@ class CommentController extends Controller
     }
 
     /**
-     * Admin: Show all comments in separate page
+     * Admin: Show all comments in a single page
      */
     public function index()
     {
+        // جلب جميع التعليقات مع بيانات المستخدم والسيارة
         $comments = Comment::with(['user', 'product'])
             ->latest()
-            ->paginate(10);
+            ->get();
 
+        // إجمالي عدد التعليقات
         $commentsCount = Comment::count();
+
+        // متوسط التقييمات
         $avgRating = Comment::avg('rating') ?? 0;
 
         return view('comments.index', compact(
@@ -52,8 +56,10 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::findOrFail($id);
+
         $comment->delete();
 
         return back()->with('message', 'Comment deleted successfully');
     }
 }
+

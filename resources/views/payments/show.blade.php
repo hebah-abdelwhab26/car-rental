@@ -446,8 +446,7 @@
 
                                 @if($payment->order->product->image)
 
-                                    <img src="{{ asset('img/product/' . $payment->order->product->image) }}"
-                                         alt="{{ $payment->order->product->name }}"
+<img src="{{ asset($payment->order->product->image) }}"                                         alt="{{ $payment->order->product->name }}"
                                          class="img-fluid rounded shadow-sm"
                                          style="width:100%; height:220px; object-fit:cover;">
 

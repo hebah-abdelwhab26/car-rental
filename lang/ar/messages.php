@@ -501,6 +501,7 @@ return [
     'select_payment_method' => '-- اختر طريقة الدفع --',
     'full_payment_information' => 'كامل معلومات الدفع المرتبطة بالحجز والعميل',
 
+    'manage_payments_description' => 'إدارة المدفوعات ومتابعة المعاملات وتحديث حالات الدفع.',
     /*
     |--------------------------------------------------------------------------
     | Payment / Order / Customer / Car sections
@@ -510,6 +511,7 @@ return [
     'quick_summary' => 'ملخص سريع',
     'no_payment' => 'لا يوجد دفع',
 
+    'review_booking_details_payment_status' => 'مراجعة تفاصيل الحجز وحالة الدفع.',
     /*
     |--------------------------------------------------------------------------
     | Comments

@@ -38,8 +38,19 @@ Route::group([
 
     Route::get('/about', fn () => view('about'))->name('about');
     Route::get('/services', fn () => view('services'))->name('services');
-    Route::get('/pricing', fn () => view('pricing'))->name('pricing');
-    Route::get('/contact', fn () => view('contact'))->name('contact');
+
+Route::get('/pricing', function () {
+    $products = \App\Models\Product::query()
+        ->where('status', '1')
+        ->where('available', true)
+        ->with('category')
+        ->withAvg('comments', 'rating')
+        ->withCount('comments')
+        ->orderBy('daily_price')
+        ->get();
+
+    return view('pricing', compact('products'));
+})->name('pricing');    Route::get('/contact', fn () => view('contact'))->name('contact');
 
     /*
     |--------------------------------------------------------------------------

@@ -49,8 +49,8 @@
             <div class="col-md-2 mb-2">
                 <select name="transmission" class="form-control">
                     <option value="">Transmission</option>
-                    <option value="automatic" {{ request('transmission')=='automatic' ? 'selected' : '' }}>Automatic</option>
-                    <option value="manual" {{ request('transmission')=='manual' ? 'selected' : '' }}>Manual</option>
+                    <option value="automatic" {{ request('transmission') == 'automatic' ? 'selected' : '' }}>Automatic</option>
+                    <option value="manual" {{ request('transmission') == 'manual' ? 'selected' : '' }}>Manual</option>
                 </select>
             </div>
 
@@ -58,9 +58,9 @@
             <div class="col-md-2 mb-2">
                 <select name="fuel_type" class="form-control">
                     <option value="">Fuel</option>
-                    <option value="petrol" {{ request('fuel_type')=='petrol' ? 'selected' : '' }}>Petrol</option>
-                    <option value="diesel" {{ request('fuel_type')=='diesel' ? 'selected' : '' }}>Diesel</option>
-                    <option value="electric" {{ request('fuel_type')=='electric' ? 'selected' : '' }}>Electric</option>
+                    <option value="petrol" {{ request('fuel_type') == 'petrol' ? 'selected' : '' }}>Petrol</option>
+                    <option value="diesel" {{ request('fuel_type') == 'diesel' ? 'selected' : '' }}>Diesel</option>
+                    <option value="electric" {{ request('fuel_type') == 'electric' ? 'selected' : '' }}>Electric</option>
                 </select>
             </div>
 
@@ -68,10 +68,10 @@
             <div class="col-md-2 mb-2">
                 <select name="sort" class="form-control">
                     <option value="">Sort By</option>
-                    <option value="price_low" {{ request('sort')=='price_low' ? 'selected' : '' }}>Price ↑</option>
-                    <option value="price_high" {{ request('sort')=='price_high' ? 'selected' : '' }}>Price ↓</option>
-                    <option value="rating" {{ request('sort')=='rating' ? 'selected' : '' }}>Rating</option>
-                    <option value="newest" {{ request('sort')=='newest' ? 'selected' : '' }}>Newest</option>
+                    <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price ↑</option>
+                    <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price ↓</option>
+                    <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Rating</option>
+                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
                 </select>
             </div>
 
@@ -108,7 +108,7 @@
                         <div class="car-img position-relative">
                             @if($product->image)
                                 <div class="car-image-box"
-                                     style="background-image: url('{{ asset('img/product/'.$product->image) }}');">
+                                     style="background-image: url('{{ asset($product->image) }}');">
                                 </div>
                             @else
                                 <div class="car-image-box d-flex align-items-center justify-content-center bg-secondary text-white">
@@ -145,6 +145,7 @@
                                 @for($i = 1; $i <= 5; $i++)
                                     {{ $i <= round($avgRating) ? '★' : '☆' }}
                                 @endfor
+
                                 <span class="text-muted">({{ number_format($avgRating, 1) }})</span>
                                 <span class="text-muted">- {{ $ratingCount }} reviews</span>
                             </div>
@@ -269,5 +270,3 @@
 </style>
 
 @endsection
-
-

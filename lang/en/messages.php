@@ -501,6 +501,7 @@ return [
     'select_payment_method' => '-- Select Payment Method --',
     'full_payment_information' => 'Full payment information linked to the reservation and customer',
 
+    'manage_payments_description' => 'Manage payments, track transactions, and update payment statuses.',
     /*
     |--------------------------------------------------------------------------
     | Payment / Order / Customer / Car sections
@@ -510,6 +511,7 @@ return [
     'quick_summary' => 'Quick Summary',
     'no_payment' => 'No Payment',
 
+    'review_booking_details_payment_status' => 'Review booking details and payment status.',
     /*
     |--------------------------------------------------------------------------
     | Comments

@@ -147,6 +147,41 @@ html, body {
             text-decoration: none !important;
         }
 
+/* عدد السيارات المفضلة بجانب القلب */
+#ftco-navbar .favorites-navbar-btn {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+#ftco-navbar .favorites-navbar-count {
+    position: absolute !important;
+    top: -7px !important;
+    right: -7px !important;
+    z-index: 100000 !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    min-width: 21px !important;
+    height: 21px !important;
+    padding: 0 5px !important;
+
+    background: #e53935 !important;
+    color: #fff !important;
+    border: 2px solid #000 !important;
+    border-radius: 50% !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+}
+
         /* =========================
            DROPDOWN
         ========================== */
@@ -311,12 +346,21 @@ html, body {
                 </div>
 
                 @auth
-                    {{-- FAVORITES --}}
-                    <a href="{{ route('favorites.index') }}"
-                       class="navbar-icon-btn"
-                       title="{{ __('messages.favorites') }}">
-                        <i class="icon-heart"></i>
-                    </a>
+
+{{-- FAVORITES --}}
+<a href="{{ route('favorites.index') }}"
+   class="navbar-icon-btn favorites-navbar-btn"
+   title="{{ __('messages.favorites') }}"
+   style="position: relative; overflow: visible;">
+
+    <i class="icon-heart"></i>
+
+    <span class="favorites-navbar-count">
+        {{ auth()->user()->favorites()->count() }}
+    </span>
+</a>
+
+
 
                     {{-- USER MENU --}}
                     <div class="dropdown" id="userDropdownWrap">

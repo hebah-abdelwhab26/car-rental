@@ -218,7 +218,7 @@ class ProductController extends Controller
         | Add new gallery images if uploaded
         |--------------------------------------------------------------------------
         */
-        if ($request->hasFile('car_images')) {
+   /*      if ($request->hasFile('car_images')) {
             $lastSort = $product->images()->max('sort_order') ?? 0;
 
             foreach ($request->file('car_images') as $index => $galleryImage) {
@@ -235,7 +235,44 @@ class ProductController extends Controller
                     'sort_order' => $lastSort + $index + 1,
                 ]);
             }
+        } */
+       /*
+|--------------------------------------------------------------------------
+| Add new gallery images if uploaded
+|--------------------------------------------------------------------------
+*/
+try {
+
+    if ($request->hasFile('car_images')) {
+
+        $lastSort = CarImage::where('product_id', $product->id)->max('sort_order') ?? 0;
+
+        foreach ($request->file('car_images') as $index => $galleryImage) {
+
+            $galleryName = rand(1, 10000) . '_' . time() . '_' . $index . '.' . $galleryImage->extension();
+
+            $galleryImage->move(
+                public_path('img/product/gallery'),
+                $galleryName
+            );
+
+            CarImage::create([
+                'product_id' => $product->id,
+                'image'      => $galleryName,
+                'sort_order' => $lastSort + $index + 1,
+            ]);
         }
+    }
+
+} catch (\Exception $e) {
+
+    dd(
+        $e->getMessage(),
+        $e->getFile(),
+        $e->getLine()
+    );
+
+}
 
         return redirect()
             ->route('products.index')

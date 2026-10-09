@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('categories.index', [
+        return view('Categories.index', [
             'result' => $categories
         ]);
     }
@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('categories.show', [
+        return view('Categories.show', [
             'result' => $category
         ]);
     }
@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('Categories.create');
     }
 
 
@@ -73,7 +73,7 @@ class CategoryController extends Controller
 
 
         return redirect()
-            ->route('categories.index')
+            ->route('Categories.index')
             ->with('message', 'Created Successfully');
     }
 
@@ -83,7 +83,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('categories.edit', [
+        return view('Categories.edit', [
             'category' => $category
         ]);
     }
@@ -185,7 +185,7 @@ class CategoryController extends Controller
 
 
         return redirect()
-            ->route('categories.index')
+            ->route('Categories.index')
             ->with('message', 'Deleted Successfully');
     }
 }

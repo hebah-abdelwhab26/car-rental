@@ -1,6 +1,11 @@
+
 @extends('layouts.guest')
 
 @section('content')
+
+@php
+    $fallbackImage = asset('images/car-1.jpg');
+@endphp
 
 <style>
     /* =========================
@@ -450,12 +455,16 @@
 <section class="hero-wrap hero-wrap-2 js-fullheight favorites-hero"
          style="background-image: url('{{ asset('images/bg_3.jpg') }}');"
          data-stellar-background-ratio="0.5">
+
     <div class="overlay"></div>
 
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+
             <div class="col-md-9 ftco-animate pb-5">
+
                 <p class="breadcrumbs mb-2">
+
                     <span class="mr-2">
                         <a href="{{ route('welcome') }}">
                             {{ __('messages.home') }}
@@ -467,11 +476,13 @@
                         {{ __('messages.my_favorites') }}
                         <i class="ion-ios-arrow-forward"></i>
                     </span>
+
                 </p>
 
                 <h1 class="mb-3 bread">
                     {{ __('messages.my_favorite_cars') }}
                 </h1>
+
             </div>
         </div>
     </div>
@@ -479,14 +490,27 @@
 
 <!-- FAVORITES -->
 <section class="ftco-section favorites-section">
+
     <div class="container">
 
         @if($favorites->count())
+
             <div class="favorites-head ftco-animate">
-                <span class="sub-title">{{ __('messages.favorites') }}</span>
-                <h2>{{ __('messages.my_favorite_cars') }}</h2>
-                <p>{{ __('messages.browse_and_add_favorites') }}</p>
+
+                <span class="sub-title">
+                    {{ __('messages.favorites') }}
+                </span>
+
+                <h2>
+                    {{ __('messages.my_favorite_cars') }}
+                </h2>
+
+                <p>
+                    {{ __('messages.browse_and_add_favorites') }}
+                </p>
+
             </div>
+
         @endif
 
         <div class="row">
@@ -502,82 +526,127 @@
                         : ($product->category->title_en ?? __('messages.na'));
 
                     $locationText = $product->location
-                        ? trim(($product->location->city ?? '') . (!empty($product->location->area) ? ' - '.$product->location->area : ''))
+                        ? trim(
+                            ($product->location->city ?? '') .
+                            (!empty($product->location->area)
+                                ? ' - ' . $product->location->area
+                                : '')
+                        )
                         : __('messages.na');
+
+                    // مسار صورة السيارة من مجلد public
+                    $imagePath = !empty($product->image)
+                        ? asset($product->image)
+                        : $fallbackImage;
                 @endphp
 
                 <div class="col-md-6 col-xl-4 mb-4 ftco-animate">
+
                     <div class="favorite-card">
 
                         <!-- IMAGE -->
                         <div class="favorite-media">
 
-                            @if($product->image)
-                                <img src="{{ asset('img/product/'.$product->image) }}" alt="{{ $product->name }}">
-                            @else
-                                <div class="favorite-placeholder">
-                                    {{ __('messages.no_image') }}
-                                </div>
-                            @endif
+                            <img
+                                src="{{ $imagePath }}"
+                                alt="{{ $product->name }}"
+                                loading="lazy"
+                                onerror="this.onerror=null; this.src='{{ $fallbackImage }}';">
 
                             <div class="favorite-badge">
+
                                 <i class="fa-solid fa-car-side"></i>
+
                                 {{ $product->brand ?? __('messages.car') }}
+
                             </div>
 
                             <div class="favorite-price-chip">
-                                <span class="price-label">{{ __('messages.daily') }}</span>
-                                <div class="price-value">${{ $product->daily_price }}</div>
+
+                                <span class="price-label">
+                                    {{ __('messages.daily') }}
+                                </span>
+
+                                <div class="price-value">
+                                    ${{ $product->daily_price }}
+                                </div>
+
                             </div>
 
-                            <form action="{{ route('favorites.toggle', $product->id) }}"
-                                  method="POST"
-                                  class="favorite-remove-form">
+                            <form
+                                action="{{ route('favorites.toggle', $product->id) }}"
+                                method="POST"
+                                class="favorite-remove-form">
+
                                 @csrf
-                                <button type="submit"
-                                        class="favorite-remove-btn"
-                                        title="{{ __('messages.remove_from_favorites') }}">
-                                     <i class="fas fa-heart"></i>
+
+                                <button
+                                    type="submit"
+                                    class="favorite-remove-btn"
+                                    title="{{ __('messages.remove_from_favorites') }}">
+
+                                    <i class="fas fa-heart"></i>
+
                                 </button>
+
                             </form>
+
                         </div>
 
                         <!-- BODY -->
                         <div class="favorite-body">
 
                             <div class="favorite-title-row">
+
                                 <h2 class="favorite-title">
+
                                     <a href="{{ route('cars.show', $product->id) }}">
                                         {{ $product->name }}
                                     </a>
+
                                 </h2>
 
                                 @if($product->year)
-                                    <span class="favorite-year-pill">{{ $product->year }}</span>
+                                    <span class="favorite-year-pill">
+                                        {{ $product->year }}
+                                    </span>
                                 @endif
+
                             </div>
 
                             <!-- RATING -->
                             <div class="favorite-rating">
+
                                 <div class="favorite-stars">
+
                                     @for($i = 1; $i <= 5; $i++)
+
                                         @if($i <= round($avgRating))
                                             <i class="fa-solid fa-star"></i>
                                         @else
                                             <i class="fa-regular fa-star"></i>
                                         @endif
+
                                     @endfor
+
                                 </div>
 
                                 <div class="favorite-rating-text">
+
                                     {{ number_format($avgRating, 1) }}
+
                                     <span class="mx-1">•</span>
-                                    {{ $ratingCount }} {{ __('messages.reviews') }}
+
+                                    {{ $ratingCount }}
+                                    {{ __('messages.reviews') }}
+
                                 </div>
+
                             </div>
 
                             <!-- TAGS -->
                             <div class="favorite-tags">
+
                                 @if($product->model)
                                     <span class="favorite-tag tag-primary">
                                         {{ $product->model }}
@@ -595,117 +664,192 @@
                                         {{ ucfirst($product->transmission) }}
                                     </span>
                                 @endif
+
                             </div>
 
                             <!-- SPEC GRID -->
                             <div class="favorite-spec-grid">
 
                                 <div class="favorite-spec-box">
+
                                     <div class="spec-top">
                                         <i class="fa-solid fa-layer-group"></i>
                                         <span>{{ __('messages.category') }}</span>
                                     </div>
+
                                     <div class="spec-value">
                                         {{ $categoryTitle }}
                                     </div>
+
                                 </div>
 
                                 <div class="favorite-spec-box">
+
                                     <div class="spec-top">
                                         <i class="fa-solid fa-location-dot"></i>
                                         <span>{{ __('messages.location') }}</span>
                                     </div>
+
                                     <div class="spec-value">
                                         {{ $locationText }}
                                     </div>
+
                                 </div>
 
                                 <div class="favorite-spec-box">
+
                                     <div class="spec-top">
                                         <i class="fa-solid fa-gas-pump"></i>
                                         <span>{{ __('messages.fuel') }}</span>
                                     </div>
+
                                     <div class="spec-value">
-                                        {{ $product->fuel_type ? ucfirst($product->fuel_type) : __('messages.na') }}
+                                        {{ $product->fuel_type
+                                            ? ucfirst($product->fuel_type)
+                                            : __('messages.na') }}
                                     </div>
+
                                 </div>
 
                                 <div class="favorite-spec-box">
+
                                     <div class="spec-top">
                                         <i class="fa-solid fa-users"></i>
                                         <span>{{ __('messages.seats') }}</span>
                                     </div>
+
                                     <div class="spec-value">
                                         {{ $product->seats ?? __('messages.na') }}
                                     </div>
+
                                 </div>
 
                             </div>
 
                             <!-- DESCRIPTION -->
                             <p class="favorite-description">
-                                {{ \Illuminate\Support\Str::limit($product->description ?: __('messages.no_description_available'), 115) }}
+
+                                {{ \Illuminate\Support\Str::limit(
+                                    $product->description ?: __('messages.no_description_available'),
+                                    115
+                                ) }}
+
                             </p>
 
                             <!-- PRICES -->
                             <div class="favorite-prices">
+
                                 <div class="favorite-price-row primary">
-                                    <span class="favorite-price-name">{{ __('messages.daily') }}</span>
-                                    <span class="favorite-price-amount">${{ $product->daily_price }}</span>
+
+                                    <span class="favorite-price-name">
+                                        {{ __('messages.daily') }}
+                                    </span>
+
+                                    <span class="favorite-price-amount">
+                                        ${{ $product->daily_price }}
+                                    </span>
+
                                 </div>
 
                                 @if($product->weekly_price)
+
                                     <div class="favorite-price-row">
-                                        <span class="favorite-price-name">{{ __('messages.weekly') }}</span>
-                                        <span class="favorite-price-amount">${{ $product->weekly_price }}</span>
+
+                                        <span class="favorite-price-name">
+                                            {{ __('messages.weekly') }}
+                                        </span>
+
+                                        <span class="favorite-price-amount">
+                                            ${{ $product->weekly_price }}
+                                        </span>
+
                                     </div>
+
                                 @endif
 
                                 @if($product->monthly_price)
+
                                     <div class="favorite-price-row">
-                                        <span class="favorite-price-name">{{ __('messages.monthly') }}</span>
-                                        <span class="favorite-price-amount">${{ $product->monthly_price }}</span>
+
+                                        <span class="favorite-price-name">
+                                            {{ __('messages.monthly') }}
+                                        </span>
+
+                                        <span class="favorite-price-amount">
+                                            ${{ $product->monthly_price }}
+                                        </span>
+
                                     </div>
+
                                 @endif
+
                             </div>
 
                             <!-- ACTIONS -->
                             <div class="favorite-actions">
+
                                 <div class="d-grid gap-2">
-                                    <a href="{{ route('orders.checkout', $product->id) }}"
-                                       class="btn btn-primary">
+
+                                    <a
+                                        href="{{ route('orders.checkout', $product->id) }}"
+                                        class="btn btn-primary">
+
                                         <i class="fa-solid fa-calendar-check me-2"></i>
+
                                         {{ __('messages.book_now') }}
+
                                     </a>
 
-                                    <a href="{{ route('cars.show', $product->id) }}"
-                                       class="btn btn-outline-dark">
+                                    <a
+                                        href="{{ route('cars.show', $product->id) }}"
+                                        class="btn btn-outline-dark">
+
                                         <i class="fa-solid fa-eye me-2"></i>
+
                                         {{ __('messages.details') }}
+
                                     </a>
+
                                 </div>
+
                             </div>
 
                         </div>
+
                     </div>
+
                 </div>
 
             @empty
 
                 <div class="col-12">
+
                     <div class="favorite-empty-box ftco-animate">
+
                         <div class="favorite-empty-icon">
                             <i class="fa-regular fa-heart"></i>
                         </div>
 
-                        <h3>{{ __('messages.no_favorite_cars_yet') }}</h3>
-                        <p>{{ __('messages.browse_and_add_favorites') }}</p>
+                        <h3>
+                            {{ __('messages.no_favorite_cars_yet') }}
+                        </h3>
 
-                        <a href="{{ route('cars') }}" class="btn btn-primary px-4 py-2">
+                        <p>
+                            {{ __('messages.browse_and_add_favorites') }}
+                        </p>
+
+                        <a
+                            href="{{ route('cars') }}"
+                            class="btn btn-primary px-4 py-2">
+
                             <i class="fa-solid fa-car-side me-2"></i>
+
                             {{ __('messages.browse_cars') }}
+
                         </a>
+
                     </div>
+
                 </div>
 
             @endforelse
@@ -713,6 +857,8 @@
         </div>
 
     </div>
+
 </section>
 
 @endsection
+

@@ -1,6 +1,11 @@
+
 @extends('layouts.guest')
 
 @section('content')
+
+@php
+    $fallbackImage = asset('images/car-1.jpg');
+@endphp
 
 <section class="hero-wrap hero-wrap-2 js-fullheight"
          style="background-image: url('{{ asset('images/bg_3.jpg') }}');"
@@ -76,20 +81,39 @@
 
                 @foreach($orders as $order)
 
+                    @php
+                        /*
+                         * صورة السيارة:
+                         * نفترض أن قيمة image تحتوي المسار النسبي
+                         * من مجلد public، مثل images/cars/car-1.jpg.
+                         */
+                        $carImage = $order->product && !empty($order->product->image)
+                            ? asset($order->product->image)
+                            : $fallbackImage;
+                    @endphp
+
                     <div class="col-lg-6 mb-4">
                         <div class="reservation-card card border-0 shadow-sm h-100 overflow-hidden">
 
                             {{-- CARD TOP IMAGE --}}
                             <div class="reservation-image-wrap position-relative">
-                                @if($order->product && $order->product->image)
-                                    <div class="reservation-image"
-                                         style="background-image:url('{{ asset('img/product/'.$order->product->image) }}');">
-                                    </div>
-                                @else
-                                    <div class="reservation-image d-flex align-items-center justify-content-center bg-secondary text-white">
-                                        {{ __('messages.no_image') }}
-                                    </div>
-                                @endif
+
+                                <div
+                                    class="reservation-image"
+                                    role="img"
+                                    aria-label="{{ $order->product->name ?? __('messages.car_reservation') }}"
+                                    style="background-image: url('{{ $carImage }}');"
+                                    onerror=""
+                                ></div>
+
+                                {{-- IMAGE ELEMENT TO DETECT MISSING IMAGES --}}
+                                <img
+                                    src="{{ $carImage }}"
+                                    alt=""
+                                    class="reservation-image-check"
+                                    loading="lazy"
+                                    onerror="this.onerror=null; this.parentElement.querySelector('.reservation-image').style.backgroundImage='url({{ $fallbackImage }})';"
+                                >
 
                                 <div class="reservation-status-badge">
                                     @if($order->status == 'pending')
@@ -125,6 +149,7 @@
                                             <h4 class="reservation-title mb-1">
                                                 {{ $order->product->name ?? __('messages.car_reservation') }}
                                             </h4>
+
                                             <p class="text-muted mb-0">
                                                 {{ __('messages.reservation_number') }} #{{ $order->id }}
                                             </p>
@@ -136,28 +161,36 @@
                                 <div class="reservation-info-grid mb-4">
 
                                     <div class="info-box">
-                                        <div class="info-label">{{ __('messages.start_date') }}</div>
+                                        <div class="info-label">
+                                            {{ __('messages.start_date') }}
+                                        </div>
                                         <div class="info-value">
                                             {{ \Carbon\Carbon::parse($order->start_date)->format('d M Y') }}
                                         </div>
                                     </div>
 
                                     <div class="info-box">
-                                        <div class="info-label">{{ __('messages.end_date') }}</div>
+                                        <div class="info-label">
+                                            {{ __('messages.end_date') }}
+                                        </div>
                                         <div class="info-value">
                                             {{ \Carbon\Carbon::parse($order->end_date)->format('d M Y') }}
                                         </div>
                                     </div>
 
                                     <div class="info-box">
-                                        <div class="info-label">{{ __('messages.total_price') }}</div>
+                                        <div class="info-label">
+                                            {{ __('messages.total_price') }}
+                                        </div>
                                         <div class="info-value text-primary font-weight-bold">
-                                            ${{ number_format($order->total_price,2) }}
+                                            ${{ number_format($order->total_price, 2) }}
                                         </div>
                                     </div>
 
                                     <div class="info-box">
-                                        <div class="info-label">{{ __('messages.payment_method') }}</div>
+                                        <div class="info-label">
+                                            {{ __('messages.payment_method') }}
+                                        </div>
                                         <div class="info-value">
                                             {{ ucfirst($order->payment_method ?? ($order->payment->payment_method ?? 'N/A')) }}
                                         </div>
@@ -167,10 +200,16 @@
 
                                 {{-- PAYMENT STATUS --}}
                                 <div class="reservation-meta-box mb-3">
-                                    <div class="meta-title">{{ __('messages.payment_details') }}</div>
+
+                                    <div class="meta-title">
+                                        {{ __('messages.payment_details') }}
+                                    </div>
 
                                     <div class="meta-row">
-                                        <span class="meta-label">{{ __('messages.payment_status') }}</span>
+                                        <span class="meta-label">
+                                            {{ __('messages.payment_status') }}
+                                        </span>
+
                                         <span class="meta-value">
                                             @php
                                                 $paymentStatus = $order->payment->payment_status ?? 'pending';
@@ -201,11 +240,15 @@
                                     </div>
 
                                     <div class="meta-row">
-                                        <span class="meta-label">{{ __('messages.booked_on') }}</span>
+                                        <span class="meta-label">
+                                            {{ __('messages.booked_on') }}
+                                        </span>
+
                                         <span class="meta-value">
                                             {{ $order->created_at->format('d M Y - h:i A') }}
                                         </span>
                                     </div>
+
                                 </div>
 
                                 {{-- ACTIONS --}}
@@ -213,23 +256,29 @@
                                     <div class="d-flex flex-wrap gap-2 reservation-actions">
 
                                         @if($order->product)
-                                            <a href="{{ route('cars.show',$order->product->id) }}"
-                                               class="btn btn-outline-dark btn-sm">
+                                            <a
+                                                href="{{ route('cars.show', $order->product->id) }}"
+                                                class="btn btn-outline-dark btn-sm">
+
                                                 {{ __('messages.view_car') }}
+
                                             </a>
                                         @endif
 
                                         @if($order->status == 'pending')
-                                            <form action="{{ route('orders.cancelReservation',$order->id) }}"
-                                                  method="POST"
-                                                  onsubmit="return confirm('{{ __('messages.cancel_confirmation') }}');"
-                                                  class="mb-0">
+                                            <form
+                                                action="{{ route('orders.cancelReservation', $order->id) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('{{ __('messages.cancel_confirmation') }}');"
+                                                class="mb-0">
+
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-danger btn-sm">
                                                     {{ __('messages.cancel_reservation') }}
                                                 </button>
+
                                             </form>
                                         @endif
 
@@ -249,7 +298,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="empty-reservations card border-0 shadow-sm text-center p-5">
+
                         <div class="card-body py-4">
+
                             <div class="empty-icon mb-4">🚗</div>
 
                             <h3 class="mb-3">
@@ -260,10 +311,16 @@
                                 {{ __('messages.no_booked_cars') }}
                             </p>
 
-                            <a href="{{ route('cars') }}" class="btn btn-primary px-4 py-2">
+                            <a
+                                href="{{ route('cars') }}"
+                                class="btn btn-primary px-4 py-2">
+
                                 {{ __('messages.browse_cars') }}
+
                             </a>
+
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -327,20 +384,28 @@
 
     .reservation-image-wrap {
         position: relative;
+        overflow: hidden;
+        background: #e9edf2;
     }
 
     .reservation-image {
         height: 240px;
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
         border-top-left-radius: 22px;
         border-top-right-radius: 22px;
+    }
+
+    .reservation-image-check {
+        display: none;
     }
 
     .reservation-status-badge {
         position: absolute;
         top: 16px;
         right: 16px;
+        z-index: 2;
     }
 
     .reservation-title {
@@ -460,3 +525,4 @@
 </style>
 
 @endsection
+
