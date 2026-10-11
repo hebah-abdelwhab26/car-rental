@@ -76,6 +76,60 @@
         text-align: center;
         color: #6b7280;
     }
+
+
+/* ===== Dashboard refinements ===== */
+.dash-card {
+    background: linear-gradient(
+        145deg,
+        rgba(24, 40, 63, .98),
+        rgba(15, 27, 45, .98)
+    ) !important;
+    border: 1px solid rgba(148, 163, 184, .18) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+}
+
+.dash-card:hover {
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .28);
+    border-color: rgba(59, 130, 246, .45) !important;
+}
+
+.stat-number {
+    color: #ffffff !important;
+}
+
+.stat-label,
+.mini-muted,
+.empty-box {
+    color: #a7b4c8 !important;
+}
+
+.section-title {
+    color: #f0c75e !important;
+}
+
+.dashboard-link {
+    color: #edf4ff !important;
+}
+
+.dashboard-link:hover {
+    color: #ffffff !important;
+}
+
+.empty-box {
+    background: rgba(255, 255, 255, .025);
+    border: 1px dashed rgba(148, 163, 184, .25);
+    border-radius: 12px;
+}
+
+.dashboard-link .dash-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.dashboard-link:hover .dash-card {
+    transform: translateY(-5px);
+}
+
 </style>
 
 

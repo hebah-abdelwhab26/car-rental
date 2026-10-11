@@ -586,16 +586,16 @@
 
 
 
-                            <a href="{{ route('payments.index') }}"
-                               class="btn btn-outline-dark">
 
+<a href="{{ route('payments.index') }}"
+   class="btn btn-sm mb-2"
+   style="background-color: #ffffff; color: #000000; border: 1px solid #d1d5db;">
 
-                                <i class="fa fa-list me-1"></i>
+    <i class="fa fa-list me-1"></i>
+    {{ __('messages.all_payments') }}
 
-                                {{ __('messages.all_payments') }}
+</a>
 
-
-                            </a>
 
 
                         </div>

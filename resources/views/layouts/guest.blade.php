@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>{{ config('app.name', 'CarBook') }}</title>
-    <meta charset="utf-8">
+<title>@yield('title', 'Car Rental | Explore Your Next Ride')</title>    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="description" content="Discover your next ride with Car Rental. Explore vehicles, compare rental options, and manage your bookings with ease.">
 
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Car Rental">
+<meta property="og:title" content="Car Rental | Explore Your Next Ride">
+<meta property="og:description" content="Explore our vehicle collection and enjoy a convenient car rental experience.">
+<meta property="og:image" content="{{ asset('images/car-rental-social.jpg') }}">
+<meta property="og:image:alt" content="Car Rental - Explore Your Next Ride">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Car Rental | Explore Your Next Ride">
+<meta name="twitter:description" content="Explore our vehicle collection and enjoy a convenient car rental experience.">
+<meta name="twitter:image" content="{{ asset('images/car-rental-social.jpg') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css') }}">
@@ -536,3 +547,4 @@ html, body {
 
 </body>
 </html>
+

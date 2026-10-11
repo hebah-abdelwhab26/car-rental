@@ -182,10 +182,13 @@
 
                                 <td>
 
-                                    <a href="{{ route('orders.show', $order->id) }}"
-                                       class="btn btn-sm btn-outline-dark mb-2">
-                                        {{ __('messages.view') }}
-                                    </a>
+
+<a href="{{ route('orders.show', $order->id) }}"
+   class="btn btn-sm btn-light mb-2"
+   style="background-color: #ffffff; color: #000000; border: 1px solid #dee2e6;">
+    {{ __('messages.view') }}
+</a>
+
 
                                     <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
                                         @csrf
