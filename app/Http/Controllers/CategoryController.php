@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('categories.index', [
+        return view('Categories.index', [
             'result' => $categories
         ]);
     }
@@ -189,4 +189,5 @@ class CategoryController extends Controller
             ->with('message', 'Deleted Successfully');
     }
 }
+
 
