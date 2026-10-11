@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('Categories.index', [
+        return view('categories.index', [
             'result' => $categories
         ]);
     }
@@ -73,7 +73,7 @@ class CategoryController extends Controller
 
 
         return redirect()
-            ->route('Categories.index')
+            ->route('categories.index')
             ->with('message', 'Created Successfully');
     }
 
@@ -185,7 +185,8 @@ class CategoryController extends Controller
 
 
         return redirect()
-            ->route('Categories.index')
+            ->route('categories.index')
             ->with('message', 'Deleted Successfully');
     }
 }
+
