@@ -12,7 +12,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $categoryIds = Category::pluck('id', 'title_en');
-        $locations = Location::orderBy('id')->get();
+        $locations = Location::whereIn('city', ['Riyadh', 'Jeddah', 'Dammam', 'Makkah', 'Madinah'])->orderBy('id')->get();
 
         if ($categoryIds->isEmpty() || $locations->isEmpty()) {
             $this->command?->error(
